@@ -1,0 +1,40 @@
+".source.splunk-conf.eventtypes":
+    "Event type stanza template":
+        "prefix": "eventtype"
+        "body": """
+        [${1:$event_type_name}]
+        search = ${2}
+        ${3}
+        """
+        "description": "Generate a template for new stanza definition for certain event type."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Eventtypesconf"
+
+    "disabled = <bool:false>":
+        "prefix": "disabled"
+        "body": "disabled = ${1:false}"
+        "description": "Toggle event type on or off."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Eventtypesconf"
+
+    "search = <string>":
+        "prefix": "search"
+        "body": "search = ${1}"
+        "description": "Search terms for this event type."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Eventtypesconf"
+
+    "priority = <int:1>":
+        "prefix": "priority"
+        "body": "priority = ${1:1}"
+        "description": "Value used to determine the order in which the matching eventtypes of an event are displayed. 1 is the highest priority and 10 is the lowest priority."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Eventtypesconf"
+
+    "description = <string>":
+        "prefix": "description"
+        "body": "description = ${1}"
+        "description": "Optional human-readable description of this saved search."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Eventtypesconf"
+
+    "color = <string>":
+        "prefix": "color"
+        "body": "color = ${1}"
+        "description": "color for this event type. Candidate values are [none|et_blue|et_green|et_magenta|et_orange|et_purple|et_red|et_sky|et_teal|et_yellow]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Eventtypesconf"

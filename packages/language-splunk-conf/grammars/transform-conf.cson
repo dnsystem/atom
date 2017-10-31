@@ -1,0 +1,49 @@
+name: "Splunk transforms.conf file"
+fileTypes: [
+    "transforms.conf"
+    "transforms.conf.spec"
+    "transforms.conf.example"
+    "transforms.conf.default"
+]
+scopeName: "source.splunk-conf.transforms"
+patterns: [
+    {
+        include: "source.splunk-conf-comment"
+    }
+    {
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.transforms" }
+            2: { name: "keyword.operator.splunk-conf.transforms" }
+            3: { name: "string.regexp.splunk-conf.transforms" }
+        }
+        match: "^\\s*(REGEX)\\s*(=)\\s*(.*)$"
+        comment: "transform regex"
+    }
+    {
+        comment: "other configuration"
+        match: "^\\s*(FORMAT|CLONE_SOURCETYPE|WRITE_META|DEST_KEY|DEFAULT_VALUE|SOURCE_KEY|REPEAT_MATCH|DELIMS|FIELDS|MV_ADD|CLEAN_KEYS|KEEP_EMPTY_VALS|CAN_OPTIMIZE|filename|collection|max_matches|min_matches|default_match|case_sensitive_match|match_type|external_cmd|fields_list|time_field|time_field|time_format|max_offset_secs|min_offset_secs|batch_index_query|allow_caching|max_ext_batch|filter|feature_id_element|queue|_raw|_meta|_time|MetaData:Host|_MetaData:Index|MetaData:Source|MetaData:Sourcetype|_TCP_ROUTING|_SYSLOG_ROUTING)\\s*(=)(.*)$"
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.transforms" }
+            2: { name: "keyword.operator.splunk-conf.transforms" }
+            3: {
+                patterns: [
+                    {
+                        include: "source.splunk-conf.value"
+                    }
+                ]
+            }
+        }
+    }
+    {
+        comment: "external_type = [python|executable|kvstore|geo]"
+        match: "^\\s*(external_type)\\s*(=)\\s*(python|executable|kvstore|geo)"
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.transforms" }
+            2: { name: "keyword.operator.splunk-conf.transforms" }
+            3: { name: "support.constant.splunk-conf.transforms" }
+        }
+    }
+    {
+        include: "source.splunk-conf"
+    }
+]

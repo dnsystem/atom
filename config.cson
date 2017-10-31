@@ -1,0 +1,17 @@
+"*":
+  core:
+    closeDeletedFileTabs: true
+    closeEmptyWindows: false
+    telemetryConsent: "limited"
+    themes: [
+      "one-light-ui"
+      "solarized-light-syntax"
+    ]
+  editor:
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+  "exception-reporting":
+    userId: "4d479ffb-280a-4fd2-b2a7-2af113b24e4d"
+  welcome:
+    showOnStartup: false

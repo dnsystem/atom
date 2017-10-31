@@ -1,0 +1,145 @@
+name: "Splunk props.conf file"
+fileTypes: [
+    "props.conf"
+    "props.conf.spec"
+    "props.conf.example"
+    "props.conf.default"
+]
+scopeName: "source.splunk-conf.props"
+patterns: [
+    {
+        include: "source.splunk-conf-comment"
+    }
+    {
+        match: "^\\s*(TRANSFORMS-)(.+?)\\s*(=)(.*)$"
+        comment: "Index time field extraction"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+            4: { name: "string.splunk-conf.props" }
+        }
+    }
+    {
+        match: "^\\s*(REPORT-)([\\w\\-\\.\\:]+?)\\s*(=)(.*)$"
+        comment: "Transform field extraction"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+            4: { name: "string.splunk-conf.props" }
+        }
+    }
+    {
+        match: "^\\s*(EXTRACT-)([\\w\\-\\.\\:]+?)\\s*(=)\\s*([^\\s]+)?\\s*(in)?\\s*(\\w+)?"
+        comment: "Inlined field extraction"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+            4: { name: "variable.parameter.splunk-conf.props" }
+            5: { name: "keyword.operator.splunk-conf.props" }
+            6: { name: "variable.parameter.splunk-conf.props" }
+        }
+    }
+    {
+        comment: "Lookup field extraction"
+        match: "^\\s*(LOOKUP-)([\\w\\-\\.\\:]+?)\\s*(=)\\s*(.+)?"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+            4: { name: "string.splunk-conf.props" }
+        }
+    }
+    {
+        match: "^\\s*(FIELDALIAS-)([\\w\\-\\.\\:]+?)\\s*(=)(.+?)\\s(AS|as)\\s(.*)"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+            4: { name: "variable.parameter.splunk-conf.props" }
+            5: { name: "keyword.operator.splunk-conf.props" }
+            6: { name: "variable.parameter.splunk-conf.props" }
+        }
+    }
+    {
+        comment: "Eval field extraction"
+        match: "^\\s*(EVAL-)([\\w]+?)\\s*(=)(.*)$"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+            4: {
+                patterns: [
+                    {
+                        include: "source.splunk"
+                    }
+                ]
+            }
+        }
+    }
+    {
+        comment: "Sed Script"
+        match: "^\\s*(SEDCMD-)([\\w\\-\\.\\:]+?)\\s*(=)\\s*(?:.+)?"
+        captures: {
+            1: { name: "support.class.splunk-conf.props" }
+            2: { name: "entity.name.function.splunk-conf.props" }
+            3: { name: "keyword.operator.splunk-conf.props" }
+        }
+    }
+    {
+        comment: "index extraction"
+        match: "^\\s*(INDEXED_EXTRACTIONS)\\s*(=)\\s*(CSV|W3C|TSV|PSV|JSON)?",
+        captures: {
+            1: { name: "keyword.control.splunk-conf.props" }
+            2: { name: "keyword.operator.splunk-conf.props" }
+            3: { name: "constant.language.splunk-conf.props" }
+        }
+    }
+    {
+        comment: "kvmode"
+        match: "^\\s*(KV_MODE)\\s*(=)\\s*(none|auto|auto_escaped|multi|json|xml)?"
+        captures: {
+            1: { name: "keyword.control.splunk-conf.props" }
+            2: { name: "keyword.operator.splunk-conf.props" }
+            3: { name: "constant.language.splunk-conf.props"}
+        }
+    }
+    {
+        comment: "check method"
+        match: "^\\s*(CHECK_METHOD)\\s*(=)\\s*(endpoint_md5|entire_md5|modtime)?"
+        captures: {
+            1: { name: "keyword.control.splunk-conf.props" }
+            2: { name: "keyword.operator.splunk-conf.props" }
+            3: { name: "constant.language.splunk-conf.props" }
+        }
+    }
+    {
+        comment: "header mode"
+        match: "^\\s*(HEADER_MODE)\\s*(=)\\s*(always|firstline|none)?"
+        captures: {
+            1: { name: "keyword.control.splunk-conf.props" }
+            2: { name: "keyword.operator.splunk-conf.props" }
+            3: { name: "constant.language.splunk-conf.props" }
+        }
+    }
+    {
+        comment: "reserved keywords"
+        match: "^\\s*(sourcetype|priority|CHARSET|TRUNCATE|TRANSFORMS|LINE_BREAKER|LINE_BREAKER_LOOKBEHIND|SHOULD_LINEMERGE|BREAK_ONLY_BEFORE_DATE|BREAK_ONLY_BEFORE|MUST_BREAK_AFTER|MUST_NOT_BREAK_AFTER|MUST_NOT_BREAK_BEFORE|MAX_EVENTS|EVENT_BREAKER_ENABLE|EVENT_BREAKER|DATETIME_CONFIG|TIME_PREFIX|MAX_TIMESTAMP_LOOKAHEAD|TIME_FORMAT|TZ|TZ_ALIAS|MAX_DAYS_AGO|MAX_DAYS_HENCE|MAX_DIFF_SECS_AGO|MAX_DIFF_SECS_HENCE|PREAMBLE_REGEX|FIELD_HEADER_REGEX|HEADER_FIELD_LINE_NUMBER|FIELD_DELIMITER|HEADER_FIELD_DELIMITER|FIELD_QUOTE|HEADER_FIELD_QUOTE|TIMESTAMP_FIELDS|FIELD_NAMES|MISSING_VALUE_REGEX|JSON_TRIM_BRACES_IN_ARRAY_NAMES|AUTO_KV_JSON|KV_TRIM_SPACES|CHECK_FOR_HEADER|NO_BINARY_CHECK|detect_trailing_nulls|SEGMENTATION|initCrcLength|PREFIX_SOURCETYPE|rename|invalid_cause|is_valid|unarchive_cmd|unarchive_sourcetype|LEARN_SOURCETYPE|LEARN_MODEL|maxDist|ANNOTATE_PUNCT|description|category|pulldown_type|SEGMENTATION-all|SEGMENTATION-inner|SEGMENTATION-outer|SEGMENTATION-raw|SEGMENTATION-standard)\\s*(=)(.*)$"
+        captures: {
+            1: { name: "keyword.control.splunk-conf.props" }
+            2: { name: "keyword.operator.splunk-conf.props" }
+            3: {
+                patterns: [
+                    {
+                        include: "source.splunk-conf.value"
+                    }
+                ]
+            }
+        }
+    }
+    {
+        include: "source.splunk-conf"
+    }
+]

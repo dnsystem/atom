@@ -1,0 +1,899 @@
+".source.splunk-conf.props":
+    "priority = <number>":
+        "prefix": "charset"
+        "body": "priority = ${1}"
+        "description": "Overrides the default ASCII ordering of matching stanza names."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "CHARSET = <string:ASCII>":
+        "prefix": "charset"
+        "body": "CHARSET = ${1:ASCII}"
+        "description": "When set, Splunk software assumes the input from the given [<spec>] is in the specified encoding."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TRUNCATE = <int:10000>":
+        "prefix": "truncate"
+        "body": "TRUNCATE = ${1:10000}"
+        "description": "Change the default maximum line length (in bytes)."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LINE_BREAKER = <regexp:([\\\\r\\\\n]+)>":
+        "prefix": "line_breaker"
+        "body": "LINE_BREAKER = ${1:([\\\\r\\\\n]+)}"
+        "description": "Specifies a regex that determines how the raw text stream is broken into initial events, before line merging takes place."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LINE_BREAKER_LOOKBEHIND = <int:100>":
+        "prefix": "line_breaker_lookbehind"
+        "body": "LINE_BREAKER_LOOKBEHIND = ${1:100}"
+        "description": "When there is leftover data from a previous raw chunk, LINE_BREAKER_LOOKBEHIND indicates the number of bytes before the end of the raw chunk (with the next chunk concatenated) that Splunk applies the LINE_BREAKER regex. You may want to increase this value from its default if you are dealing with especially large or multi-line events."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SHOULD_LINEMERGE = <bool:true>":
+        "prefix": "should_linemerge"
+        "body": "SHOULD_LINEMERGE = ${1:true}"
+        "description": "When set to true, Splunk combines several lines of data into a single multi-line event, based on the following configuration attributes."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "BREAK_ONLY_BEFORE_DATE = <bool:true>":
+        "prefix": "break_only_before_date"
+        "body": "BREAK_ONLY_BEFORE_DATE = ${1:true}"
+        "description": "When set to true, Splunk creates a new event only if it encounters a new line with a date."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "BREAK_ONLY_BEFORE = <regexp>":
+        "prefix": "break_only_before"
+        "body": "BREAK_ONLY_BEFORE = "
+        "description": "When set, Splunk creates a new event only if it encounters a new line that matches the regular expression."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MUST_BREAK_AFTER = <regexp>":
+        "prefix": "must_break_after"
+        "body": "MUST_BREAK_AFTER = "
+        "description": "When set and the regular expression matches the current line, Splunk creates a new event for the next input line."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MUST_NOT_BREAK_AFTER = <regexp>":
+        "prefix": "must_not_break_after"
+        "body": "MUST_NOT_BREAK_AFTER = "
+        "description": "When set and the current line matches the regular expression, Splunk does not break on any subsequent lines until the MUST_BREAK_AFTER expression matches."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MUST_NOT_BREAK_BEFORE = <regexp>":
+        "prefix": "must_not_break_before"
+        "body": "MUST_NOT_BREAK_BEFORE = "
+        "description": "When set and the current line matches the regular expression, Splunk does not break the last event before the current line."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_EVENTS = <int:256>":
+        "prefix": "max_events"
+        "body": "MAX_EVENTS = ${1:256}"
+        "description": "Specifies the maximum number of input lines to add to any event."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVENT_BREAKER_ENABLE = <bool:false>":
+        "prefix": "event_breaker_enable"
+        "body": "EVENT_BREAKER_ENABLE = ${1:false}"
+        "description": "When set to true, Splunk will split incoming data with a light-weight chunked line breaking processor so that data is distributed fairly evenly amongst multiple indexers. Use this setting on the UF to indicate that data should be split on event boundaries across indexers especially for large files."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVENT_BREAKER = <regexp>":
+        "prefix": "event_breaker"
+        "body": "EVENT_BREAKER = "
+        "description": "When set, Splunk will use the setting to define an event boundary at the end of the first matching group instance."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "DATETIME_CONFIG = <filename:\/etc\/datetime.xml>":
+        "prefix": "datetime_config"
+        "body": "DATETIME_CONFIG = ${1:\\\/etc\\\/datetime.xml}"
+        "description": "Specifies which file(relative to $SPLUNK_HOME) configures the timestamp extractor, which identifies timestamps from the event text."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TIME_PREFIX = <regexp>":
+        "prefix": "time_prefix"
+        "body": "TIME_PREFIX = "
+        "description": "If set, splunk scans the event text for a match for this regex in event text before attempting to extract a timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_TIMESTAMP_LOOKAHEAD = <int:150>":
+        "prefix": "max_timestamp_lookahead"
+        "body": "MAX_TIMESTAMP_LOOKAHEAD = ${1:150}"
+        "description": "Specifies how far (in characters) into an event Splunk should look for a timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TIME_FORMAT = <strptime-style format>":
+        "prefix": "time_format"
+        "body": "TIME_FORMAT = "
+        "description": "Specifies a strptime format string to extract the date."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TZ = <timezone identifier>":
+        "prefix": "tz"
+        "body": "TZ = "
+        "description": "The algorithm for determining the time zone for a particular event is as follows: If the event has a timezone in its raw text (for example, UTC, -08:00), use that. If TZ is set to a valid timezone string, use that. If the event was forwarded, and the forwarder-indexer connection is using the 6.0+ forwarding protocol, use the timezone provided by the forwarder. Otherwise, use the timezone of the system that is running splunkd."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TZ_ALIAS = <key=value>[, <key=value>...]":
+        "prefix": "tz_alias"
+        "body": "TZ_ALIAS = ${1:key1}=${2:value1}, ${3:key2}=${4:value2}"
+        "description": "Provides splunk admin-level control over how timezone strings extracted from events are interpreted."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DAYS_AGO = <int:2000>":
+        "prefix": "max_days_ago"
+        "body": "MAX_DAYS_AGO = ${1:2000}"
+        "description": "Specifies the maximum number of days in the past, from the current date as provided by input layer(For e.g. forwarder current time, or modtime for files), that an extracted date can be valid. Splunk still indexes events with dates older than MAX_DAYS_AGO with the timestamp of the last acceptable event. If no such acceptable event exists, new events with timestamps older than MAX_DAYS_AGO will use the current timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DAYS_HENCE = <int:2>":
+        "prefix": "max_days_hence"
+        "body": "MAX_DAYS_HENCE = ${1:2}"
+        "description": "Specifies the maximum number of days in the future, from the current date as provided by input layer(For e.g. forwarder current time, or modtime for files), that an extracted date can be valid. Splunk still indexes events with dates more than MAX_DAYS_HENCE in the future with the timestamp of the last acceptable event. If no such acceptable event exists, new events with timestamps after MAX_DAYS_HENCE will use the current timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DIFF_SECS_AGO = <int:3600>":
+        "prefix": "max_diff_secs_ago"
+        "body": "MAX_DIFF_SECS_AGO = ${1:3600}"
+        "description": "This setting prevents Splunk Enterprise from rejecting events with timestamps that are out of order."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DIFF_SECS_HENCE = <int:604800>":
+        "prefix": "max_diff_secs_hence"
+        "body": "MAX_DIFF_SECS_HENCE = ${1:604800}"
+        "description": "This setting prevents Splunk Enterprise from rejecting events with timestamps that are out of order."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "INDEXED_EXTRACTIONS = [CSV|W3C|TSV|PSV|JSON]":
+        "prefix": "indexed_extractions"
+        "body": "INDEXED_EXTRACTIONS = "
+        "description": "Tells Splunk the type of file and the extraction and/or parsing method Splunk should use on the file. Candidate values are [CSV|W3C|TSV|PSV|JSON]."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "PREAMBLE_REGEX = <regexp>":
+        "prefix": "preamble_regex"
+        "body": "PREAMBLE_REGEX = "
+        "description": "Some files contain preamble lines. This attribute specifies a regular expression which allows Splunk to ignore these preamble lines, based on the pattern specified."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_HEADER_REGEX = <regexp>":
+        "prefix": "field_header_regex"
+        "body": "FIELD_HEADER_REGEX = "
+        "description": "A regular expression that specifies a pattern for prefixed headers. Note that the actual header starts after the pattern and it is not included in the header field."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_FIELD_LINE_NUMBER = <int:0>":
+        "prefix": "heaser_field_line_number"
+        "body": "HEADER_FIELD_LINE_NUMBER = ${1:0}"
+        "description": "Tells Splunk the line number of the line within the file that contains the header fields. If set to 0, Splunk attempts to locate the header fields within the file automatically."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_DELIMITER = <char>":
+        "prefix": "field_delimiter"
+        "body": "FIELD_DELIMITER = "
+        "description": "Tells Splunk which character delimits or separates fields in the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_FIELD_DELIMITER = <char>":
+        "prefix": "header_field_delimiter"
+        "body": "HEADER_FIELD_DELIMITER = "
+        "description": "Tells Splunk which character delimits or separates header fields in the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_QUOTE = <char>":
+        "prefix": "field_quote"
+        "body": "FIELD_QUOTE = "
+        "description": "Tells Splunk the character to use for quotes in the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_FIELD_QUOTE = <char>":
+        "prefix": "header_field_quote"
+        "body": "HEADER_FIELD_QUOTE = "
+        "description": "Specifies Splunk the character to use for quotes in the header of the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TIMESTAMP_FIELDS = <string>[, <string>...]":
+        "prefix": "timestamp_fields"
+        "body": "TIMESTAMP_FIELDS = ${1:string1}, ${2:string2}"
+        "description": "Some CSV and structured files have their timestamp encompass multiple fields in the event separated by delimiters. This attribute tells Splunk to specify all such fields which constitute the timestamp in a comma-separated fashion."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_NAMES = <string>[, <string>...]":
+        "prefix": "field_names"
+        "body": "FIELD_NAMES = ${1:string1}, ${2:string2}"
+        "description": "Some CSV and structured files might have missing headers. This attribute tells Splunk to specify the header field names directly."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MISSING_VALUE_REGEX = <regexp>":
+        "prefix": "missing_value_regex"
+        "body": "MISSING_VALUE_REGEX = "
+        "description": "Tells Splunk the placeholder to use in events where no value is present."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "JSON_TRIM_BRACES_IN_ARRAY_NAMES = <bool:false>":
+        "prefix": "json_trim_braces_in_array_names"
+        "body": "JSON_TRIM_BRACES_IN_ARRAY_NAMES = ${1:false}"
+        "description": "Tell the json parser not to add the curly braces to array names."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TRANSFORMS-<class> = <stanza_name1>[, <stanza_name2>...]":
+        "prefix": "transforms"
+        "body": "TRANSFORMS-${1:class} = ${2:stanza_name1}, ${3:stanza_name2}"
+        "description": "Used for creating indexed fields (index-time field extractions)"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "REPORT-<class> = <stanza_name1>[, <stanza_name2>...]":
+        "prefix": "report"
+        "body": "REPORT-${1:class} = ${2:stanza_name1}, ${3:stanza_name2}"
+        "description": "Used for creating extracted fields (search-time field extractions) that reference one or more transforms.conf stanzas."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EXTRACT-<class> = <regexp>[ in <field>]":
+        "prefix": "extract"
+        "body": "EXTRACT-${1:class} = ${2}"
+        "description": "Used to create extracted fields (search-time field extractions) that do not reference transforms.conf stanzas."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "KV_MODE = [none|auto|auto_escaped|multi|json|xml]":
+        "prefix": "kv_mode"
+        "body": "KV_MODE = ${1:auto}"
+        "description": "Used for search-time field extractions only. Specifies the field/value extraction mode for the data. Candidate values are [none|auto|auto_escaped|multi|json|xml]."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MATCH_LIMIT = <int:100000>":
+        "prefix": "match_limit"
+        "body": "MATCH_LIMIT = ${1:100000}"
+        "description": "Only set in props.conf for EXTRACT type field extractions. For REPORT and TRANSFORMS field extractions, set this in transforms.conf. Limits the amount of resources that will be spent by PCRE when running patterns that will not match."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "AUTO_KV_JSON = <bool:true>":
+        "prefix": "auto_kv_json"
+        "body": "AUTO_KV_JSON = ${1:true}"
+        "description": "Used for search-time field extractions only. Specifies whether to try json extraction automatically."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "KV_TRIM_SPACES = <bool:true>":
+        "prefix": "kv_trim_spaces"
+        "body": "KV_TRIM_SPACES = ${1:true}"
+        "description": "Modifies the behavior of KV_MODE when set to auto, and auto_escaped."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "CHECK_FOR_HEADER = <bool:false>":
+        "prefix": "check_for_header"
+        "body": "CHECK_FOR_HEADER = ${1:false}"
+        "description": "Used for index-time field extractions only. Set to true to enable header-based field extraction for a file."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELDALIAS-<class>":
+        "prefix": "fieldalias"
+        "body": "FIELDALIAS-${1:class} = ${2:orig_field_name} AS ${3:new_field_name}"
+        "description": "Use this to apply aliases to a field. The original field is not removed. This just means that the original field can be searched on using any of its aliases."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVAL-<fieldname> = <eval statement>":
+        "prefix": "eval"
+        "body": "EVAL-${1:fieldname} = ${2}"
+        "description": "Use this to automatically run the <eval statement> and assign the value of the output to <fieldname>. This creates a \"calculated field.\""
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVAL:case(X,\"Y\",...)":
+        "prefix": "case"
+        "body": "case(${1:X}, ${2:Y})${3}"
+        "description": "This function takes pairs of arguments X and Y. The X arguments are Boolean expressions that will be evaluated from first to last. When the first X expression is encountered that evaluates to TRUE, the corresponding Y argument will be returned. The function defaults to NULL if none are true."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:cidrmatch(\"X\",Y)":
+        "prefix": "cidrmatch"
+        "body": "cidrmatch(${1:X}, ${2:Y})${3}"
+        "description": "This function returns true, when IP address Y belongs to a particular subnet X. The function uses two string arguments: the first is the CIDR subnet; the second is the IP address to match. This function is compatible with IPv6."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:coalesce(X,...)":
+        "prefix": "coalesce"
+        "body": "coalesce(${1:X}, ${2:Y})${3}"
+        "description": "This function takes an arbitrary number of arguments and returns the first value that is not null."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:false()":
+        "prefix": "false"
+        "body": "false()"
+        "description": "This function enables you to specify a conditional that is obviously false, for example 1==0. You do not specify a field with this function."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:if(X,Y,Z)":
+        "prefix": "if"
+        "body": "if(${1:X}, ${2:Y}, ${3:Z})${4}"
+        "description": "This function takes three arguments. The first argument X must be a Boolean expression. If X evaluates to TRUE, the result is the second argument Y. If, X evaluates to FALSE, the result evaluates to the third argument Z."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:like(TEXT, PATTERN)":
+        "prefix": "like"
+        "body": "like(${1:TEXT}, ${2:PATTERN})${3}"
+        "description": "This function takes two arguments, a string to match TEXT and a match expression string PATTERN. It returns TRUE if and only if the first argument is like the SQLite pattern in Y. The pattern language supports exact text match, as well as % characters for wildcards and _ characters for a single character match."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:match(SUBJECT, \"REGEX\")":
+        "prefix": "match"
+        "body": "match(${1:SUBJECT}, ${2:REGEX})${3}"
+        "description": "This function compares the regex string REGEX to the value of SUBJECT and returns a Boolean value. It returns true if the REGEX can find a match against any substring of SUBJECT."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:null()":
+        "prefix": "null"
+        "body": "null()"
+        "description": "This function takes no arguments and returns NULL. The evaluation engine uses NULL to represent \"no value\". Setting a field to NULL clears the field value."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:nullif(X,Y)":
+        "prefix": "nullif"
+        "body": "nullif(${1:X}, ${2:Y})${3}"
+        "description": "This function is used to compare fields. The function takes two arguments, X and Y, and returns NULL if X = Y. Otherwise it returns X."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:searchmatch(X)":
+        "prefix": "searchmatch"
+        "body": "searchmatch((${1:X})${2}"
+        "description": "This function takes one argument X, which is a search string. The function returns true IF AND ONLY IF the event matches the search string."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:true()":
+        "prefix": "true"
+        "body": "true()"
+        "description": "This function enables you to specify a conditional that is obviously true, for example 1==1. You do not specify a field with this function."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:validate(X,Y,...)":
+        "prefix": "validate"
+        "body": "validate(${1:X}, ${2:Y})${3}"
+        "description": "This function takes pairs of arguments, Boolean expressions X and strings Y. The function returns the string Y corresponding to the first expression X that evaluates to False and defaults to NULL if all are True."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:tonumber(NUMSTR[,BASE])":
+        "prefix": "tonumber"
+        "body": "tonumber(${1:X})${2}"
+        "description": "This function converts the input string NUMSTR to a number. NUMSTR can be a field name or a value. BASE is optional and used to define the base of the number to convert to. BASE can be 2 to 36, and defaults to 10. If the tonumberfunction cannot parse a field value to a number, for example if the value contains a leading and trailing space, the function returns NULL. Use the trim function to remove leading or trailing spaces. If the tonumber function cannot parse a literal string to a number, it returns an error."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:tostring(X,Y)":
+        "prefix": "tostring"
+        "body": "tostring(${1:X}, ${2:Y})${3}"
+        "description": "This function converts the input value to a string. If the input value is a number, it reformats it as a string. If the input value is a Boolean value, it returns the corresponding string value, \"True\" or \"False\"."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:md5(X)":
+        "prefix": "md5"
+        "body": "md5(${1:X})${2}"
+        "description": "This function computes and returns the MD5 hash of a string value X."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sha1(X)":
+        "prefix": "sha1"
+        "body": "sha1(${1:X})${2}"
+        "description": "This function computes and returns the secure hash of a string value X based on the FIPS compliant SHA-1 hash function."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sha256(X)":
+        "prefix": "sha256"
+        "body": "sha256(${1:X})${2}"
+        "description": "This function computes and returns the secure hash of a string value X based on the FIPS compliant SHA-256 hash function."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sha512(X)":
+        "prefix": "sha512"
+        "body": "sha512(${1:X})${2}"
+        "description": "This function computes and returns the secure hash of a string value X based on the FIPS compliant SHA-512 hash function."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:now()":
+        "prefix": "now"
+        "body": "now()"
+        "description": "This function takes no arguments and returns the time that the search was started. The time is represented in Unix time or in seconds since Epoch time."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:relative_time(X,Y)":
+        "prefix": "relative_time"
+        "body": "relative_time(${1:X}, ${2:Y})${3}"
+        "description": "This function takes an epochtime time, X, as the first argument and a relative time specifier, Y, as the second argument and returns the epochtime value of Y applied to X."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:strftime(X,Y)":
+        "prefix": "strftime"
+        "body": "strftime(${1:X}, ${2:Y})${3}"
+        "description": "This function takes an epochtime value, X, as the first argument and renders it as a string using the format specified by Y."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:strptime(X,Y)":
+        "prefix": "strptime"
+        "body": "strptime(${1:X}, ${2:Y})${3}"
+        "description": "This function takes a time represented by a string, X, and parses it into a timestamp using the format specified by Y."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:time()":
+        "prefix": "time"
+        "body": "time()"
+        "description": "This function returns the wall-clock time with microsecond resolution. The value of time() will be different for each event based on when that event was processed by the eval command."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:isbool(X)":
+        "prefix": "isbool"
+        "body": "isbool(${1:X})${2}"
+        "description": "This function takes one argument X and evaluates whether X is a Boolean data type. The function returns TRUE if X is Boolean. Use this function with functions that return Boolean data types, such as cidrmatch and mvfind."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:isint(X)":
+        "prefix": "isint"
+        "body": "isint(${1:X})${2}"
+        "description": "This function takes one argument X and returns TRUE if X is an integer."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:isnotnull(X)":
+        "prefix": "isnotnull"
+        "body": "isnotnull(${1:X})${2}"
+        "description": "This function takes one argument X and returns TRUE if X is not NULL. This is a useful check for whether or not a field (X) contains a value."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:isnull(X)":
+        "prefix": "isnull"
+        "body": "isnull(${1:X})${2}"
+        "description": "This function takes one argument X and returns TRUE if X is NULL."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:isnum(X)":
+        "prefix": "isnum"
+        "body": "isnum(${1:X})${2}"
+        "description": "This function takes one argument X and returns TRUE if X is a number."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:isstr(X)":
+        "prefix": "isstr"
+        "body": "isstr(${1:X})${2}"
+        "description": "This function takes one argument X and returns TRUE if X is a string."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:typeof(X)":
+        "prefix": "typeof"
+        "body": "typeof(${1:X})${2}"
+        "description": "This function takes one argument and returns a string representation of its type."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:abs(X)":
+        "prefix": "abs"
+        "body": "abs(${1:X})${2}"
+        "description": "This function takes a number X and returns its absolute value."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:ceiling(X)":
+        "prefix": "ceiling"
+        "body": "ceiling(${1:X})${2}"
+        "description": "This function rounds a number X up to the next highest integer."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:exact(X)":
+        "prefix": "exact"
+        "body": "exact(${1:X})${2}"
+        "description": "This function renders the result of a numeric eval calculation with a larger amount of precision in the formatted output."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:exp(X)":
+        "prefix": "exp"
+        "body": "exp(${1:X})${2}"
+        "description": "This function takes a number X and returns the exponential function eX."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:floor(X)":
+        "prefix": "floor"
+        "body": "floor(${1:X})${2}"
+        "description": "This function rounds a number X down to the nearest whole integer."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:ln(X)":
+        "prefix": "ln"
+        "body": "ln(${1:X})${2}"
+        "description": "This function takes a number X and returns its natural log."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:log(X[,Y])":
+        "prefix": "log"
+        "body": "log(${1:X})${2}"
+        "description": "This function takes either one or two numeric arguments and returns the log of the first argument X using the second argument Y as the base. If the second argument Y is omitted, this function evaluates the log of number X with base 10."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:pi()":
+        "prefix": "pi"
+        "body": "pi()"
+        "description": "This function takes no arguments and returns the constant pi to 11 digits of precision."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:pow(X,Y)":
+        "prefix": "pow"
+        "body": "pow(${1:X}, ${2:Y})${3}"
+        "description": "This function takes two numeric arguments X and Y and returns XY."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:round(X,Y)":
+        "prefix": "round"
+        "body": "round(${1:X}, ${2:Y})${3}"
+        "description": "This function takes one or two numeric arguments X and Y, returning X rounded to the amount of decimal places specified by Y. The default is to round to an integer."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sigfig(X)":
+        "prefix": "sigfig"
+        "body": "sigfig(${1:X})${2}"
+        "description": "This function takes one argument X, a number, and rounds that number to the appropriate number of significant figures."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sqrt(X)":
+        "prefix": "sqrt"
+        "body": "sqrt(${1:X})${2}"
+        "description": "This function takes one numeric argument X and returns its square root."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:commands(X)":
+        "prefix": "commands"
+        "body": "commands(${1:X})${2}"
+        "description": "This function takes a search string, or field that contains a search string, X and returns a multivalued field containing a list of the commands used in X. (This is generally not recommended for use except for analysis of audit.log events.)"
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvappend(X,...)":
+        "prefix": "mvappend"
+        "body": "mvappend(${1:X}, ${2:Y})${3}"
+        "description": "This function takes an arbitrary number of arguments and returns a multivalue result of all the values. The arguments can be strings, multivalue fields or single value fields."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvcount(MVFIELD)":
+        "prefix": "mvcount"
+        "body": "mvcount(${1:MVFIELD})${2}"
+        "description": "This function takes a field MVFIELD. The function returns the number of values if it is a multivalue, 1 if it is a single value field, and NULL otherwise."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvdedup(X)":
+        "prefix": "mvdedup"
+        "body": "mvdedup(${1:X})${2}"
+        "description": "This function takes a multivalue field X and returns a multivalue field with its duplicate values removed."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvfilter(X)":
+        "prefix": "mvfilter"
+        "body": "mvfilter(${1:X})${2}"
+        "description": "This function filters a multivalue field based on an arbitrary Boolean expression X. The Boolean expression X can reference ONLY ONE field at a time."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvfind(MVFIELD, \"REGEX\")":
+        "prefix": "mvfind"
+        "body": "mvfind(${1:MVFIELD}, ${2:REGEX})${3}"
+        "description": "This function tries to find a value in multivalue field X that matches the regular expression REGEX. If a match exists, the index of the first matching value is returned (beginning with zero). If no values match, NULL is returned."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvindex(MVFIELD, STARTINDEX, ENDINDEX)":
+        "prefix": "mvindex"
+        "body": "mvindex(${1:MVFIELD}, ${2:STARTINDEX}, ${3:ENDINDEX})${4}"
+        "description": "This function takes two or three arguments, field MVFIELD and numbers STARTINDEX and ENDINDEX, and returns a subset of the multivalue field using the indexes provided."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvindex(MVFIELD,STARTINDEX)":
+        "prefix": "mvindex"
+        "body": "mvindex(${1:MVFIELD}, ${2:STARTINDEX})${3}"
+        "description": "For mvindex(mvfield, startindex, [endindex]), endindex is inclusive and optional. Both startindex and endindex can be negative, where -1 is the last element. If endindex is not specified, it returns only the value at startindex. If the indexes are out of range or invalid, the result is NULL."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvjoin(MVFIELD,STR)":
+        "prefix": "mvjoin"
+        "body": "mvjoin(${1:MVFIELD}, ${2:STR})${3}"
+        "description": "This function takes two arguments, multivalue field MVFIELD and string delimiter STR. The function concatenates the individual values of MVFIELD with copies of STR in between as separators."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvrange(X,Y,Z)":
+        "prefix": "mvrange"
+        "body": "mvrange(${1:X}, ${2:Y}, ${3:Z})${4}"
+        "description": "This function creates a multivalue field for a range of numbers. This function can contain up to three arguments: a starting number X, an ending number Y (exclusive), and an optional step increment Z. If the increment is a timespan such as '7'd, the starting and ending numbers are treated as epoch times."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvsort(X)":
+        "prefix": "mvsort"
+        "body": "mvsort(${1:X}, ${2:Y})${3}"
+        "description": "This function uses a multivalue field X and returns a multivalue field with the values sorted lexicographically."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:mvzip(X,Y,\"Z\")":
+        "prefix": "mvzip"
+        "body": "mvzip(${1:X}, ${2:Y}, ${3:Z})${4}"
+        "description": "This function takes two multivalue fields, X and Y, and combines them by stitching together the first value of X with the first value of field Y, then the second with the second, and so on. The third argument, Z, is optional and is used to specify a delimiting character to join the two values. The default delimiter is a comma. This is similar to Python's zip command."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:max(X,...)":
+        "prefix": "max"
+        "body": "max(${1:X}, ${2:Y})${3}"
+        "description": "This function takes an arbitrary number of numeric or string arguments, and returns the max; strings are greater than numbers."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:min(X,...)":
+        "prefix": "min"
+        "body": "min(${1:X}, ${2:Y})${3}"
+        "description": "This function takes an arbitrary number of numeric or string arguments, and returns the min; strings are greater than numbers."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:random()":
+        "prefix": "random"
+        "body": "random()"
+        "description": "This function takes no arguments and returns a pseudo-random integer ranging from zero to 231-1, for example: 0…2147483647"
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:len(X)":
+        "prefix": "len"
+        "body": "len(${1:X})${2}"
+        "description": "This function returns the character length of a string X."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:lower(X)":
+        "prefix": "lower"
+        "body": "lower(${1:X})${2}"
+        "description": "This function takes one string argument and returns the lowercase version. The upper() function also exists for returning the uppercase version."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:ltrim(X[,Y])":
+        "prefix": "ltrim"
+        "body": "ltrim(${1:X})${2}"
+        "description": "This function takes one or two arguments X and Y and returns X with the characters in Y trimmed from the left side. If Y is not specified, spaces and tabs are removed."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:replace(X,Y,Z)":
+        "prefix": "replace"
+        "body": "replace(${1:X}, ${2:Y}, ${3:Z})${4}"
+        "description": "This function returns a string formed by substituting string Z for every occurrence of regex string Y in string X. The third argument Z can also reference groups that are matched in the regex."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:rtrim(X[,Y])":
+        "prefix": "rtrim"
+        "body": "rtrim(${1:X})${2}"
+        "description": "This function takes one or two arguments X and Y and returns X with the characters in Y trimmed from the right side. If Y is not specified, spaces and tabs are removed."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:spath(X,Y)":
+        "prefix": "spath"
+        "body": "spath(${1:X}, ${2:Y})${3}"
+        "description": "This function takes two arguments: an input source field X and an spath expression Y, that is the XML or JSON formatted location path to the value that you want to extract from X. If Y is a literal string, it needs quotes, spath(X,\"Y\"). If Y is a field name (with values that are the location paths), it doesn't need quotes. This may result in a multivalued field. Read more about the spath search command."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:split(X,\"Y\")":
+        "prefix": "split"
+        "body": "split(${1:X}, ${2:Y})${3}"
+        "description": "This function takes two arguments, field X and delimiting character Y. It splits the value(s) of X on the delimiter Y and returns X as a multivalue field."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:substr(X,Y,Z)":
+        "prefix": "substr"
+        "body": "substr(${1:X}, ${2:Y}, ${3:Z})${4}"
+        "description": "This function takes either two or three arguments, where X is a string and Y and Z are numeric. It returns a substring of X, starting at the index specified by Y with the number of characters specified by Z. If Z is not given, it returns the rest of the string."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:trim(X[,Y])":
+        "prefix": "trim"
+        "body": "trim(${1:X})${2}"
+        "description": "This function takes one or two arguments X and Y and returns X with the characters in Y trimmed from both sides. If Y is not specified, spaces and tabs are removed."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:upper(X)":
+        "prefix": "upper"
+        "body": "upper(${1:X})${2}"
+        "description": "This function takes one string argument and returns the uppercase version. The lower() function also exists for returning the lowercase version."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:urldecode(X)":
+        "prefix": "urldecode"
+        "body": "urldecode(${1:X})${2}"
+        "description": "This function takes one URL string argument X and returns the unescaped or decoded URL string."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:acos(X)":
+        "prefix": "acos"
+        "body": "acos(${1:X})${2}"
+        "description": "This function computes the arc cosine of X, in the interval [0,pi] radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:acosh(X)":
+        "prefix": "acosh"
+        "body": "acosh(${1:X})${2}"
+        "description": "This function computes the arc hyperbolic cosine of X, in radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:asin(X)":
+        "prefix": "asin"
+        "body": "asin(${1:X})${2}"
+        "description": "This function computes the arc sine of X, in the interval [-pi/2,+pi/2] radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:asinh(X)":
+        "prefix": "asinh"
+        "body": "asinh(${1:X})${2}"
+        "description": "This function computes the arc hyperbolic sine of X, in radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:atan(X)":
+        "prefix": "atan"
+        "body": "atan(${1:X})${2}"
+        "description": "This function computes the arc tangent of X, in the interval [-pi/2,+pi/2] radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:atan2(Y, X)":
+        "prefix": "atan2"
+        "body": "atan2(${1:X}, ${2:Y})${3}"
+        "description": "This function computes the arc tangent of Y, X in the interval [-pi,+pi] radians. Y is a value that represents the proportion of the y-coordinate. X is the value that represents the proportion of the x-coordinate."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:atanh(X)":
+        "prefix": "atanh"
+        "body": "atanh(${1:X})${2}"
+        "description": "This function computes the arc hyperbolic tangent of X, in radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:cos(X)":
+        "prefix": "cos"
+        "body": "cos(${1:X})${2}"
+        "description": "This function computes the cosine of an angle of X radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:cosh(X)":
+        "prefix": "cosh"
+        "body": "cosh(${1:X})${2}"
+        "description": "This function computes the hyperbolic cosine of X radians."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:hypot(X,Y)":
+        "prefix": "hypot"
+        "body": "hypot(${1:X}, ${2:Y})${3}"
+        "description": "This function computes the hypotenuse of a right-angled triangle whose legs are X and Y."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sin(X)":
+        "prefix": "sin"
+        "body": "sin(${1:X})${2}"
+        "description": "This function computes the sine."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:sinh(X)":
+        "prefix": "sinh"
+        "body": "sinh(${1:X})${2}"
+        "description": "This function computes the hyperbolic sine."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:tan(X)":
+        "prefix": "tan"
+        "body": "tan(${1:X})${2}"
+        "description": "This function computes the tangent."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "EVAL:tanh(X)":
+        "prefix": "tanh"
+        "body": "tanh(${1:X})${2}"
+        "description": "This function computes the hyperbolic tangent."
+        "descriptionMoreURL": "https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/CommonEvalFunctions"
+
+    "LOOKUP-<class>":
+        "prefix": "lookup"
+        "body": "LOOKUP-${1:class} = ${2:$TRANSFORM_STANZA} ${3:match_field} AS ${4:match_field_in_event} OUTPUT ${5:output_field} AS ${6:output_field_in_event}"
+        "description": "At search time, identifies a specific lookup table and describes how that lookup table should be applied to events."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SEDCMD-<class> = <sed script>":
+        "prefix": "sedcmd"
+        "body": "SEDCMD-${1:class} = ${2}"
+        "description": "Only used at index time. Commonly used to anonymize incoming data at index time, such as credit card or social security numbers. For more information, search the online documentation for \"anonymize data.\""
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SEDCMD:replace":
+        "prefix": "replace"
+        "body": "replace － s/${1:regex}/${2:replacement}/${3:flags}"
+        "description": "regex is a perl regular expression (optionally containing capturing groups). replacement is a string to replace the regex match. Use \\n for back references, where \"n\" is a single digit. flags can be either: g to replace all matches, or a number to replace a specified match."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SEDCMD:substitute":
+        "prefix": "substitute"
+        "body": "substitute － y/${1:string1}/${2:string2}/"
+        "description": "substitutes the string1[i] with string2[i]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "NO_BINARY_CHECK = <bool:false>":
+        "prefix": "no_binary_check"
+        "body": "NO_BINARY_CHECK = ${1:false}"
+        "description": "When set to true, Splunk processes binary files."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "detect_trailing_nulls = <string>":
+        "prefix": "detect_trailing_nulls"
+        "body": "detect_trailing_nulls = ${1:false}"
+        "description": "This feature was introduced to work around programs which foolishly preallocate their log files with nulls and fill in data later. The well-known case is Internet Information Server. Defaults to false on *nix, true on windows. Candidate values are [auto|true|false]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "PREFIX_SOURCETYPE = <bool:true>":
+        "prefix": "prefix_sourcetype"
+        "body": "PREFIX_SOURCETYPE = ${1:true}"
+        "description": "Determines the source types that are given to files smaller than 100
+  lines, and are therefore not classifiable."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "rename = <string>":
+        "prefix": "rename"
+        "body": "rename = ${1}"
+        "description": "With renaming, you can search for the [<sourcetype>] with
+  sourcetype=<string>."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "invalid_cause = <string>":
+        "prefix": "invalid_cause"
+        "body": "invalid_cause = ${1}"
+        "description": "If invalid_cause is set, the Tailing code (which handles uncompressed logfiles) will not read the data, but hand it off to other components or throw an error."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "force_local_processing = <bool:false>":
+        "prefix": "force_local_processing"
+        "body": "force_local_processing = ${1:false}"
+        "description": "Forces a universal forwarder to process all data tagged with this sourcetype locally before forwarding it to the indexers."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "unarchive_cmd = <string>":
+        "prefix": "unarchive_cmd"
+        "body": "unarchive_cmd = ${1}"
+        "description": "Only called if invalid_cause is set to \"archive\". This field is only valid on [source::<source>] stanzas. <string> specifies the shell command to run to extract an archived source. Must be a shell command that takes input on stdin and produces output on stdout."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "unarchive_sourcetype = <string>":
+        "prefix": "unarchive_sourcetype"
+        "body": "unarchive_sourcetype = ${1}"
+        "description": "Sets the source type of the contents of the matching archive file. Use
+  this field instead of the sourcetype field to set the source type of
+  archive files that have the following extensions: gz, bz, bz2, Z."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LEARN_SOURCETYPE = <bool:true>":
+        "prefix": "learn_sourcetype"
+        "body": "LEARN_SOURCETYPE = ${1:true}"
+        "description": "Determines whether learning of known or unknown sourcetypes is enabled."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LEARN_MODEL = <bool:true>":
+        "prefix": "learn_model"
+        "body": "LEARN_MODEL = ${1:true}"
+        "description": "For known source types, the file classifier adds a model file to the
+  learned directory."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "maxDist = <int:300>":
+        "prefix": "maxDist"
+        "body": "maxDist = ${1:300}"
+        "description": "Determines how different a source type model may be from the current file."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MORE_THAN_<int> = <regexp>":
+        "prefix": "more_than"
+        "body": "MORE_THAN_${1} = ${2}"
+        "description": "This setting applies at input time, when data is first read by Splunk, such as on a forwarder."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LESS_THAN_<int> = <regexp>":
+        "prefix": "less_than"
+        "body": "LESS_THAN_${1} = ${2}"
+        "description": "This setting applies at input time, when data is first read by Splunk, such as on a forwarder."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "ANNOTATE_PUNCT = <bool:true>":
+        "prefix": "annotate_punct"
+        "body": "ANNOTATE_PUNCT = ${1:true}"
+        "description": "Determines whether to index a special token starting with \"punct::\"."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_MODE = <string>":
+        "prefix": "header_mode"
+        "body": "HEADER_MODE = ${1}"
+        "description": "Determines whether to use the inline ***SPLUNK*** directive to rewrite index-time fields. Candidate values are [<empty>|always|firstline|none]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "description = <string>":
+        "prefix": "description"
+        "body": "description = ${1}"
+        "description": "Field used to describe the sourcetype. Does not affect indexing behavior."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "category = <string>":
+        "prefix": "category"
+        "body": "category = ${1}"
+        "description": "Field used to classify sourcetypes for organization in the front end. Case sensitive. Does not affect indexing behavior."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"

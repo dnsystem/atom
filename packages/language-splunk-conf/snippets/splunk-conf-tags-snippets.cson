@@ -1,0 +1,19 @@
+".source.splunk-conf.tags":
+    "Event type stanza template":
+        "prefix": "eventtype"
+        "body": """
+        [eventtype=${1:$event_type_name}]
+        ${2:$tag_name} = enabled
+        ${3}
+        """
+        "description": "Generate a template for new stanza definition for certain event type."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Tagsconf"
+
+    "Tag definition":
+        "prefix": "tag"
+        "body": """
+        ${1:$tag_name} = enabled
+        ${2}
+        """
+        "description": "Generate a template for new tag definition for certain event type."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Tagsconf"

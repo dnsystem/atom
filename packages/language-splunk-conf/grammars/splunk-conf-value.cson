@@ -1,0 +1,16 @@
+name: "splunk conf values"
+scopeName: "source.splunk-conf.value"
+patterns: [
+        {
+            match: "^\\s*\\d+?\\.?\\d*\\s*$"
+            name: "constant.numeric.splunk-conf"
+        }
+        {
+            match: "(?i)^\\s*(none|true|false|yes|no|y|n|1|0)\\s*$"
+            name: "constant.language.splunk-conf"
+        }
+        {
+            match: ".+"
+            name: "string.splunk-conf.value"
+        }
+]

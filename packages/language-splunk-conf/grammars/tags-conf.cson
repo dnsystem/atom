@@ -1,0 +1,31 @@
+name: "Splunk tags.conf file"
+fileTypes: [
+    "tags.conf"
+    "tags.conf.spec"
+    "tags.conf.example"
+    "tags.conf.default"
+]
+scopeName: "source.splunk-conf.tags"
+patterns: [
+    {
+        include: "source.splunk-conf-comment"
+    }
+    {
+        match: "^\\s*\\[(.*?)\\s*(=)\\s*(.*?)\\s*\\]\\s*$"
+        captures: {
+            1: { name: "support.function.splunk-conf.tags" }
+            2: { name: "keyword.operator.splunk-conf.tags" }
+            3: { name: "string.splunk-conf.tags" }
+        }
+        comment: "tags stanza"
+    }
+    {
+        comment: "tags configuration"
+        match: "^\\s*(.*?)\\s*(=)\\s*(enabled|disabled)?\\s*$"
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.tags" }
+            2: { name: "keyword.operator.splunk-conf.tags" }
+            3: { name: "constant.language.splunk-conf.tags" }
+        }
+    }
+]

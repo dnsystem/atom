@@ -1,0 +1,54 @@
+name: "Splunk eventtypes.conf file"
+fileTypes: [
+    "eventtypes.conf"
+    "eventtypes.conf.spec"
+    "eventtypes.conf.example"
+    "eventtypes.conf.default"
+]
+scopeName: "source.splunk-conf.eventtypes"
+patterns: [
+    {
+        include: "source.splunk-conf-comment"
+    }
+    {
+        match: "^\\s*\\[.*?\\]\\s*$"
+        name: "support.function.splunk-conf.eventtypes"
+        comment: "eventtypes stanza"
+    }
+    {
+        comment: "eventtypes configuration"
+        match: "^\\s*(disabled|priority|description|tags)\\s*(=)\\s*(.*?)\\s*$"
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.eventtypes" }
+            2: { name: "keyword.operator.splunk-conf.eventtypes" }
+            3: {
+                patterns: [
+                    { include: "source.splunk-conf.value" }
+                ]
+            }
+        }
+    }
+    {
+        comment: "use spl to highlight the search"
+        match: "^\\s*(search)\\s*(=)(.*)$"
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.eventtypes" }
+            2: { name: "keyword.operator.splunk-conf.eventtypes" }
+            3: {
+                patterns: [
+                    { include: "source.splunk" }
+                ]
+            }
+        }
+    }
+    {
+        comment: "color setting"
+        match: "^\\s*(color)\\s*(=)\\s*(none|et_blue|et_green|et_magenta|et_orange,
+  et_purple|et_red|et_sky|et_teal|et_yellow)?\\s*$"
+        captures: {
+            1: { name: "entity.name.function.splunk-conf.eventtypes" }
+            2: { name: "keyword.operator.splunk-conf.eventtypes" }
+            3: { name: "support.constant.splunk-conf.eventtypes" }
+        }
+    }
+]

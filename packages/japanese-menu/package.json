@@ -1,0 +1,78 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+        "spec": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+        "type": "local"
+      },
+      "C:\\Users\\lkb\\AppData\\Local\\Temp\\apm-install-dir-117820-12804-ua0lrh.3qkkpgb9"
+    ]
+  ],
+  "_from": "..\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+  "_id": "japanese-menu@1.13.0",
+  "_inCache": true,
+  "_location": "/japanese-menu",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+    "spec": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:..\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+  "_shasum": "98714b3202bb3bb0aaa0284a0e909279cbd1a084",
+  "_shrinkwrap": null,
+  "_spec": "C:\\Users\\lkb\\AppData\\Local\\Temp\\d-117820-12804-1kku15k.svm61aif6r\\package.tgz",
+  "_where": "C:\\Users\\lkb\\AppData\\Local\\Temp\\apm-install-dir-117820-12804-ua0lrh.3qkkpgb9",
+  "bugs": {
+    "url": "https://github.com/syon/atom-japanese-menu/issues"
+  },
+  "dependencies": {},
+  "description": "メニューバーとコンテキストメニュー、設定画面を日本語化します。",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "homepage": "https://github.com/syon/atom-japanese-menu",
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "japanese-menu",
+  "optionalDependencies": {},
+  "readme": "# Atom - Japanese Menu\n\nAtom のメニューバーとコンテキストメニュー、設定画面を日本語化します。\n\n![screenshot](https://github.com/syon/atom-japanese-menu/raw/master/screenshot.png)\n\n![screenshot](https://github.com/syon/atom-japanese-menu/raw/master/screenshot2.png)\n\n![screenshot](https://github.com/syon/atom-japanese-menu/raw/master/screenshot3.png)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syon/atom-japanese-menu.git"
+  },
+  "version": "1.13.0",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib\\context-menu.coffee",
+        "lib\\findandreplace.coffee",
+        "lib\\main.coffee",
+        "lib\\menu.coffee",
+        "lib\\preferences-settings.coffee",
+        "lib\\preferences-util.coffee",
+        "lib\\preferences.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
